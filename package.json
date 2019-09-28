@@ -19,6 +19,7 @@
   "homepage": "https://github.com/vilelamarcospaulo/wishlist#readme",
   "dependencies": {
     "koa": "^2.8.2",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "mongodb": "^3.3.2"
   }
 }
