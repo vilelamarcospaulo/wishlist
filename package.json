@@ -1,0 +1,24 @@
+{
+  "name": "wishlist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "test",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vilelamarcospaulo/wishlist.git"
+  },
+  "author": "vilelamarcospaulo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vilelamarcospaulo/wishlist/issues"
+  },
+  "homepage": "https://github.com/vilelamarcospaulo/wishlist#readme",
+  "dependencies": {
+    "koa": "^2.8.2",
+    "koa-router": "^7.4.0"
+  }
+}
