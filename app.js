@@ -1,9 +1,11 @@
 const Koa = require('koa');
 const Router = require('koa-router');
 const BodyParser = require('koa-bodyparser');
+const jwt = require('./security/koajwt');
 
-const router = new Router()
 const app = new Koa();
+const router = new Router();
+const secureRouter = new Router();
 
 (async () => {
     await require('./infrastructure/dbcollections')(app); // REGISTER DBCOLLECTIONS 
@@ -19,12 +21,18 @@ const app = new Koa();
     require('./domain/clientWishlist')(app)
 })()
 
-//INITIALIZE ROUTES
-require('./routes/index')(router) 
-require('./routes/client')(router)
+//AUTH ROUTE
+require('./routes/auth')(router);
 
-app.use(BodyParser())
-app.use(router.routes())
+secureRouter.use(jwt);
+
+//INITIALIZE ROUTES
+require('./routes/index')(secureRouter);
+require('./routes/client')(secureRouter);
+
+app.use(BodyParser());
+app.use(router.routes()).use(router.allowedMethods());
+app.use(secureRouter.routes()).use(secureRouter.allowedMethods());
 
 let port = process.env.PORT || 3000;
 let server = app.listen(port, () => {
