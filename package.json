@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "test",
+    "test": "mocha --recursive --exit",
     "start": "node app.js"
   },
   "repository": {
@@ -18,8 +18,13 @@
   },
   "homepage": "https://github.com/vilelamarcospaulo/wishlist#readme",
   "dependencies": {
+    "axios": "^0.19.0",
+    "chai": "^4.2.0",
     "koa": "^2.8.2",
+    "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
-    "mongodb": "^3.3.2"
+    "mocha": "^6.2.1",
+    "mongodb": "^3.3.2",
+    "supertest": "^4.0.2"
   }
 }
