@@ -2,8 +2,8 @@ const validation = require('../helpers/validation')
 const errors = require('../helpers/errors')
 
 module.exports = app => {
-    app.domain.wishList = {
-        addProduct: addProduct(app.repositories.client)(app.integration.product),
+    app.domains.wishList = {
+        addProduct: addProduct(app.repositories.client)(app.integrations.product),
         removeProduct: removeProduct(app.repositories.client),
     }
 }

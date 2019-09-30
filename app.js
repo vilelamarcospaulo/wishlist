@@ -7,16 +7,16 @@ const app = new Koa();
 const router = new Router();
 const secureRouter = new Router();
 
-(async () => {
+(async _ => {
     await require('./infrastructure/dbcollections')(app); // REGISTER DBCOLLECTIONS 
 
     // REGISTER INTEGRATION
-    app.integration = {}
+    app.integrations = {}
     require('./integration/product')(app)
 
 
      // REGISTER DOMAINS
-    app.domain = {}
+    app.domains = {}
     require('./domain/client')(app)
     require('./domain/clientWishlist')(app)
 })()
@@ -35,7 +35,7 @@ app.use(router.routes()).use(router.allowedMethods());
 app.use(secureRouter.routes()).use(secureRouter.allowedMethods());
 
 let port = process.env.PORT || 3000;
-let server = app.listen(port, () => {
+let server = app.listen(port, _ => {
     console.log(`server running at ${server.address().address}:${server.address().port}`)
 });
 

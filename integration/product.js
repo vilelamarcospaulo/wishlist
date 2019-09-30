@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 module.exports = app => {
-    app.integration.product = {
+    app.integrations.product = {
         find: find,
     }
 }

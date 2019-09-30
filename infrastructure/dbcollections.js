@@ -14,7 +14,7 @@ module.exports = async (app) => {
             await db.dropDatabase()
         }
         
-        db.on('close', () => { 
+        db.on('close', _ => { 
             console.error('MONGODB_DISCONNECTED'); 
             process.exit(1)
         });

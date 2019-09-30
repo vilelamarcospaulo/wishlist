@@ -4,7 +4,7 @@ const errors = require('../helpers/errors')
 const validateInput = 
     (client, repository) => 
         validate(client)
-        .then(() => validateEmailAlredyUsed(client, repository))
+        .then(_ => validateEmailAlredyUsed(client, repository))
 
 const validate = async (client) => {
     validation.validateField(client, 'client')()
@@ -15,9 +15,9 @@ const validate = async (client) => {
     return client
 }
 
-const validateEmalFormat = (email) => () => {
+const validateEmalFormat = (email) => _ => {
     if(!/\S+@\S+\.\S+/.test(email))
-        throw errors.defaultException('INVALID_FIELD', `Invalid format for email  ${email}`, '')
+        throw errors.defaultException('INVALID_FIELD', `Invalid format for email ${email}`, '')
     return validation.ok
 }
 

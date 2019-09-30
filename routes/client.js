@@ -14,13 +14,13 @@ const defaultClientExecutor = async (ctx, f) => {
 }
 
 module.exports = (router) => {
-    router.get('/client/', ctx => defaultClientExecutor(ctx, ctx.app.domain.client.listClients))
-    router.get('/client/:id/', ctx => defaultClientExecutor(ctx, ctx.app.domain.client.findClient))
-    router.delete('/client/:id/', ctx => defaultClientExecutor(ctx, ctx.app.domain.client.deleteClient))
+    router.get('/client/', ctx => defaultClientExecutor(ctx, ctx.app.domains.client.listClients))
+    router.get('/client/:id/', ctx => defaultClientExecutor(ctx, ctx.app.domains.client.findClient))
+    router.delete('/client/:id/', ctx => defaultClientExecutor(ctx, ctx.app.domains.client.deleteClient))
     
-    router.post('/client/', ctx => defaultClientExecutor(ctx, (_, body) => ctx.app.domain.client.createClient(body)))
-    router.put('/client/:id/', ctx => defaultClientExecutor(ctx, ctx.app.domain.client.updateClient))
+    router.post('/client/', ctx => defaultClientExecutor(ctx, (_, body) => ctx.app.domains.client.createClient(body)))
+    router.put('/client/:id/', ctx => defaultClientExecutor(ctx, ctx.app.domains.client.updateClient))
 
-    router.post('/client/:id/product/', ctx => defaultClientExecutor(ctx, (id, body) => ctx.app.domain.wishList.addProduct(id, body.productId))) 
-    router.delete('/client/:id/product/:productId', ctx => defaultClientExecutor(ctx, _ => ctx.app.domain.wishList.removeProduct(ctx.params.id, ctx.params.productId)))
+    router.post('/client/:id/product/', ctx => defaultClientExecutor(ctx, (id, body) => ctx.app.domains.wishList.addProduct(id, body.productId))) 
+    router.delete('/client/:id/product/:productId', ctx => defaultClientExecutor(ctx, _ => ctx.app.domains.wishList.removeProduct(ctx.params.id, ctx.params.productId)))
 }

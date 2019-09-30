@@ -1,7 +1,7 @@
 const clientValidation = require('../validation/clientValidation')
 
 module.exports = app => {
-    app.domain.client = {
+    app.domains.client = {
         findClient: findClient(app.repositories.client),
         deleteClient: deleteClient(app.repositories.client),
 
