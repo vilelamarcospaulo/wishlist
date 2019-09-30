@@ -6,9 +6,6 @@ module.exports = app => {
     }
 }
 
-process.env.PRODUCT_API_BASE_URL = 'http://challenge-api.luizalabs.com'
-process.env.PRODUCT_API_PATH = 'api/product'
-
 const find = async productId => {
     let urlRequest = `${process.env.PRODUCT_API_BASE_URL}/${process.env.PRODUCT_API_PATH}/${productId}`
     try{

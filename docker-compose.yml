@@ -1,13 +1,23 @@
 version: '3'
-
 services:
+  wishlist:
+    restart: always
+    container_name: wishlist
+    environment:
+        MONGO_DB_CONNECTION: "mongodb://mongo:27017/WishlistDB"
+        PRODUCT_API_BASE_URL: "http://challenge-api.luizalabs.com"
+        PRODUCT_API_PATH: "api/product"
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    links:
+      - mongo
   mongo:
+    container_name: mongo
     image: mongo
+    volumes:
+      - ./data:/data/db
     ports:
       - "27017:27017"
-    networks:
-      - mongo-compose-network
-
-networks: 
-    mongo-compose-network:
-      driver: bridge

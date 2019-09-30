@@ -6,7 +6,7 @@ module.exports = (router) => {
         if (ctx.request.header.token === process.env.AUTH_TOKEN_VALUE) {
             ctx.status = 200;
             ctx.body = {
-              token: jsonwebtoken.sign({ role: 'adm' }, 'key'),
+              token: jsonwebtoken.sign({ role: 'adm' }, process.env.JWT_SECRET_VALUE),
             };
         }
         return ctx;
