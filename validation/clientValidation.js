@@ -1,8 +1,6 @@
 const validation = require('../helpers/validation')
 const errors = require('../helpers/errors')
 
-const ObjectID = require('mongodb').ObjectID
-
 const validateInput = 
     (client, repository) => 
         validate(client)
@@ -24,13 +22,7 @@ const validateEmalFormat = (email) => () => {
 }
 
 const validateEmailAlredyUsed = async (client, repository) => {
-    let query = { 'email' : client.email }
-    if(client.id) {
-        query._id = { '$ne': ObjectID(client.id) } 
-    }
-
-    let count = await repository.countDocuments(query)
-    if( count > 0) {
+    if(await repository.findOneByEmailAndIdNotEquals(client.id, client.email)) {
         throw errors.defaultException('INVALID_FIELD', `Email ${client.email} already used`, '')
     }
 

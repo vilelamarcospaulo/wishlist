@@ -1,32 +1,25 @@
 const validation = require('../helpers/validation')
 const errors = require('../helpers/errors')
 
-const ObjectID = require('mongodb').ObjectID
-
 module.exports = app => {
     app.domain.wishList = {
-        addProduct: addProduct(app.collections.client)(app.integration.product),
-        removeProduct: removeProduct(app.collections.client),
+        addProduct: addProduct(app.repositories.client)(app.integration.product),
+        removeProduct: removeProduct(app.repositories.client),
     }
-}
-
-const findClient = repository => async id => {
-    if(!ObjectID.isValid(id)) return null
-    return await repository.findOne({_id: new ObjectID(id)})
 }
 
 const addProduct = repository => productIntegration => async (clientId, productId) => {
     validateInput(clientId, productId)
-
-    let client = await findClient(repository)(clientId)
+    
+    let client = await repository.findOne(clientId)
     if(!client) return null 
 
     validateProductAlreadyExists(client, productId)
     await validateProductExists(productIntegration, productId)
 
     client = addProductToWishList(client, productId)
-    client = await updateProductList(repository)(client)
-
+    client = await repository.update(clientId, client)
+    
     return client
 }
 
@@ -34,13 +27,13 @@ const addProduct = repository => productIntegration => async (clientId, productI
 const removeProduct = repository => async (clientId, productId) => {
     validateInput(clientId, productId)
 
-    let client = await findClient(repository)(clientId)
+    let client = await repository.findOne(clientId)
     if(!client) return null 
 
     if(!client.products || client.products.indexOf(productId) == -1) return null;
     client.products.splice(client.products.indexOf(productId) , 1)
 
-    client = await updateProductList(repository)(client)
+    client = await repository.update(clientId, client)
     return client
 }
 
@@ -68,9 +61,3 @@ const addProductToWishList = (client, productId) => {
     
     return client
 }
-
-const updateProductList = repository => async client =>
-     (await repository.findOneAndUpdate(
-        {_id: new ObjectID(client._id)}, 
-        { $set: { 'products' : client.products } }, 
-        { returnOriginal : false })).value
