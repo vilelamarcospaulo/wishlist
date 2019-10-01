@@ -1,0 +1,355 @@
+swagger: "2.0"
+info:
+  description: "Wishlist API, to manage clients products."
+  version: "1.0.0"
+  title: "Wishlist"
+  termsOfService: ""
+  contact:
+    email: "marcospaulo.vilelasantos@gmail.com"
+tags:
+- name: "Auth"
+  description: "Authentication to use API"
+- name: "Client"
+  description: "Control the clients"
+
+paths:
+  /auth:
+    post:
+      tags:
+        - "Auth"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+      - in: "header"
+        name: "token"
+        type: "string"
+        description: "Key to autorize the API (seted by ENV VARIABLE)"
+      responses:
+        401:
+          description: "Unauthorized"
+          
+        200:
+          description: "Sucess"
+          schema:
+            $ref: "#/definitions/Authorized"
+  /client:
+    post:
+      tags:
+      - "Client"
+      summary: "Add a new client on the base"
+      description: ""
+      operationId: "addClient"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+        description: "Bearer authorization token"
+        
+      - in: "body"
+        name: "body"
+        description: "Client representation object"
+        required: true
+        schema:
+          $ref: "#/definitions/ClientInput"
+      responses:
+        401:
+          description: "Unauthorized"
+          
+        400:
+          description: "Bad request, when fields are not ok!"
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+        412:
+          description: "Precondition Failed, when fields are not ok, with the business rules!"
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+        200:
+          description: "Sucess"
+          schema:
+            $ref: "#/definitions/Client"
+    get:
+      tags:
+      - "Client"
+      summary: "List all clients on the base"
+      description: ""
+      operationId: "getListClient"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+        description: "Bearer authorization token"
+        
+      responses:
+        401:
+          description: "Unauthorized"
+        
+        200:
+          description: "Sucess"
+          schema:
+            type: object
+            properties:
+              clients: 
+                type: array
+                items: 
+                  $ref: "#/definitions/Client"         
+  /client/{id}:
+    get:
+      tags:
+      - "Client"
+      summary: "Get a client by id"
+      description: ""
+      operationId: "getClient"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+        description: "Bearer authorization token"
+      - in: "path"
+        required: true
+        name: "id"
+        type: "string"
+        description: "client id"
+        
+      responses:
+        401:
+          description: "Unauthorized"
+        
+        404:
+          description: "Not found"
+          
+        200:
+          description: "Sucess"
+          schema:
+            $ref: "#/definitions/Client"
+    put:
+      tags:
+      - "Client"
+      summary: "Update a client data"
+      description: ""
+      operationId: "updateClient"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+        description: "Bearer authorization token"
+      - in: "path"
+        required: true
+        name: "id"
+        type: "string"
+        description: "client id"
+      - in: "body"
+        name: "body"
+        description: "Client representation object"
+        required: true
+        schema:
+          $ref: "#/definitions/ClientInput"
+      
+      responses:
+        401:
+          description: "Unauthorized"
+        
+        400:
+          description: "Bad request, when fields are not ok!"
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+        412:
+          description: "Precondition Failed, when fields are not ok, with the business rules!"
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+            
+        404:
+          description: "Not found"
+          
+        200:
+          description: "Sucess"
+          schema:
+            $ref: "#/definitions/Client"
+    delete:
+      tags:
+      - "Client"
+      summary: "Delete a client"
+      description: ""
+      operationId: "deleteClient"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+        description: "Bearer authorization token"
+      - in: "path"
+        required: true
+        name: "id"
+        type: "string"
+        description: "client id"
+      
+      responses:
+        401:
+          description: "Unauthorized"
+        
+        404:
+          description: "Not found"
+          
+        200:
+          description: "Sucess"
+          schema:
+            $ref: "#/definitions/Client"
+  /client/{id}/product:
+    post:
+      tags:
+      - "Client"
+      summary: "Add a product to client"
+      description: ""
+      operationId: "addProductToClient"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+        description: "Bearer authorization token"
+        
+      - in: "path"
+        required: true
+        name: "id"
+        type: "string"
+        description: "client id"
+      - in: "body"
+        name: "body"
+        description: "Client representation object"
+        required: true
+        schema: 
+            $ref: "#/definitions/ProductInput"
+      responses:
+        401:
+          description: "Unauthorized"
+        
+        400:
+          description: "Bad request, when fields are not ok!"
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+        412:
+          description: "Precondition Failed, when fields are not ok, with the business rules!"
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+
+        404:
+          description: "Not found"
+          
+        200:
+          description: "Sucess"
+          schema:
+            $ref: "#/definitions/Client"
+  /client/{id}/product/{productId}:
+    delete:
+      tags:
+      - "Client"
+      summary: "Remove product from client"
+      description: ""
+      operationId: "remProductToClient"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "header"
+        name: "Authorization"
+        type: "string"
+        description: "Bearer authorization token"
+      - in: "path"
+        required: true
+        name: "id"
+        type: "string"
+        description: "client id"
+      - in: "path"
+        required: true
+        name: "productId"
+        type: "string"
+        description: "product id"
+      
+      responses:
+        401:
+          description: "Unauthorized"
+        
+        404:
+          description: "Not found (client or product)"
+          
+        200:
+          description: "Sucess"
+          schema:
+            $ref: "#/definitions/Client"
+
+definitions:
+  Authorized:
+    type: "object"
+    properties: 
+      token: 
+        type: "string"
+        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtIiwiaWF0IjoxNTY5OTQ0NTM4fQ.T_WVhjzgINvv7wCLpY_BWxnWP9Np1LQqlEl_4QBwhUs"
+  Client:
+    type: "object"
+    properties:
+      _id: 
+        type: "string"
+        example: "5d93740681a1860012a36dbb"
+      name:
+        type: "string"
+        example: "Jhon Doe"
+      email:
+        type: "string"
+        example: "jhon@corp.com"
+      products:
+        type: "array"
+        items:
+          type: "string"
+        example: "['1bf0f365-fbdd-4e21-9786-da459d78dd1f']"
+  ClientInput:
+    type: "object"
+    required:
+      - name
+      - email 
+    properties:
+      name:
+        type: "string"
+        example: "Jhon Doe"
+      email:
+        type: "string"
+        example: "jhon@corp.com"
+  ProductInput:
+    type: "object"
+    required:
+      - productId
+    properties:
+      productId:
+        type: "string"
+        example: "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+      
+  ApiErrorResponse:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      errorMessage:
+        type: "string"
