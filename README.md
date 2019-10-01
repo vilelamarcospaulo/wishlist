@@ -35,7 +35,8 @@ PRODUCT\_API\_PATH | "api/product" | Path de acesso da API de produtos
 Na pasta raiz do projeto encontram-se os arquivos `Dockerfile` e `docker-compose.yml`. Com isto ao executar o comando `docker-compose up --build` será criada a imagem da aplicação e executada em conjunto com a imagem `mongo` (já inclusa no compose). A imagem será criada com os valores default para as variaveis de ambiente, caso seja necessario modificar alguma basta alterar nesses arquivos e executar o comando novamente.
 
 ### Localmente SEM DOCKER
-Após configurar as variaveis de ambientes necessarias (descritas na sessão anterior), garanta que possui `node versão 10` ou superior instalado. Com isso execute o comando `npm install` para instalar as dependencias necessarias do projeto, após instaladas execute `npm test`, para garantir a integridade da aplicação e por fim inicie com `npm start`.
+Após configurar as variaveis de ambientes necessarias (descritas na sessão anterior), garanta que possui `node versão 10` ou superior instalado. Com isso execute o comando `npm install` para instalar as dependencias necessarias do projeto, após instaladas execute `npm test`, para garantir a integridade da aplicação e por fim inicie com `npm start`. Obs: Garanta que exista um servidor `mongodb` executando com acesso via a URL de conexão apontada em `MONGO\_DB\_CONNECTION`.
+
 
 ## Testes
 Para executar os testes na aplicação, estando na pasta da aplicação com `node` versão 10 ou superior e com as dependencias instaladas(`npm install`) execute o comando
@@ -43,16 +44,16 @@ Para executar os testes na aplicação, estando na pasta da aplicação com `nod
 
 # Executanto a aplicação
 ## APIs
-    Na pasta raiz, todas as APIs estão descritas no documento `documentation.swagger`. Utilize um visualizador `swagger` para visualizar as APIs. (As APIs não serão descritas nesse README, pois serão muito melhor compreendidas atravez da documentação swagger.)
+Na pasta raiz, todas as APIs estão descritas no documento `documentation.swagger`. Utilize um visualizador `swagger` para visualizar as APIs. (As APIs não serão descritas nesse README, pois serão muito melhor compreendidas atravez da documentação swagger.)
 
 # Auth
-    Toda chamada nessa API está protegida por `token JWT`, para realizar a autenticação e obtenção do token autenticado, deve ser realizada chamada no recurso `\auth`. O mesmo irã validar se o valor passado no `header token` é igual ao valor da variavel de ambiente `AUTH\_TOKEN\_VALUE`. Caso seja, irá ser retornado um token que devera ser passado no formato `Bearer <token>` no header `Authorization`.
+Toda chamada nessa API está protegida por `token JWT`, para realizar a autenticação e obtenção do token autenticado, deve ser realizada chamada no recurso `\auth`. O mesmo irã validar se o valor passado no `header token` é igual ao valor da variavel de ambiente `AUTH\_TOKEN\_VALUE`. Caso seja, irá ser retornado um token que devera ser passado no formato `Bearer <token>` no header `Authorization`.
 
 ## Chamadas via `Postman`
-    Na mesma localidade existe a pasta `postman` onde se encontra a collection e o ambiente para auxiliar nas chamadas da `API`. Na chamada do recurso `\auth` via essa collection o token de autenticação ja será colocado como variavel e utilizado nas chamadas posteriores, para facilitar os testes.
+Na mesma localidade existe a pasta `postman` onde se encontra a collection e o ambiente para auxiliar nas chamadas da `API`. Na chamada do recurso `\auth` via essa collection o token de autenticação ja será colocado como variavel e utilizado nas chamadas posteriores, para facilitar os testes.
 
 
 ## Version: 1.0.0
-o
+
 **Contact information:**  
 marcospaulo.vilelasantos@gmail.com  
