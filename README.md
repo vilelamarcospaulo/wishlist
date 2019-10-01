@@ -47,7 +47,7 @@ Para executar os testes na aplicação, estando na pasta da aplicação com `nod
 Na pasta raiz, todas as APIs estão descritas no documento `documentation.swagger`. Utilize um visualizador `swagger` para visualizar as APIs. (As APIs não serão descritas nesse README, pois serão muito melhor compreendidas atravez da documentação swagger.)
 
 # Auth
-Toda chamada nessa API está protegida por `token JWT`, para realizar a autenticação e obtenção do token autenticado, deve ser realizada chamada no recurso `\auth`. O mesmo irã validar se o valor passado no `header token` é igual ao valor da variavel de ambiente `AUTH\_TOKEN\_VALUE`. Caso seja, irá ser retornado um token que devera ser passado no formato `Bearer <token>` no header `Authorization`.
+Toda chamada nessa API está protegida por `token JWT`, para realizar a autenticação e obtenção do token autenticado, deve ser realizada chamada no recurso `\auth`. O mesmo irã validar se o valor passado no `header token` é igual ao valor da variavel de ambiente `AUTH_TOKEN_VALUE`. Caso seja, irá ser retornado um token que devera ser passado no formato `Bearer <token>` no header `Authorization`.
 
 ## Chamadas via `Postman`
 Na mesma localidade existe a pasta `postman` onde se encontra a collection e o ambiente para auxiliar nas chamadas da `API`. Na chamada do recurso `\auth` via essa collectio\n o token de autenticação ja será colocado como variavel e utilizado nas chamadas posteriores, para facilitar os testes.
