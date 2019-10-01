@@ -28,7 +28,7 @@ describe('add product to client wishlist', _ => {
                 expect(err).to.contain.property('code')
                 expect(err).to.contain.property('msg')
     
-                expect(err.code).to.eq('INVALID_FIELD')
+                expect(err.code).to.eq('INVALID_PRODUCT')
                 expect(err.msg).to.eq('Product SKU123 already registred')
     
                 done()  

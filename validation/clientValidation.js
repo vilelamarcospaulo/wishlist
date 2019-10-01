@@ -17,13 +17,13 @@ const validate = async (client) => {
 
 const validateEmalFormat = (email) => _ => {
     if(!/\S+@\S+\.\S+/.test(email))
-        throw errors.defaultException('INVALID_FIELD', `Invalid format for email ${email}`, '')
+        throw errors.defaultException('INVALID_EMAIL', `Invalid format for email ${email}`, '')
     return validation.ok
 }
 
 const validateEmailAlredyUsed = async (client, repository) => {
     if(await repository.findOneByEmailAndIdNotEquals(client.id, client.email)) {
-        throw errors.defaultException('INVALID_FIELD', `Email ${client.email} already used`, '')
+        throw errors.defaultException('INVALID_EMAIL', `Email ${client.email} already used`, '')
     }
 
     return client

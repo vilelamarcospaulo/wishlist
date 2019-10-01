@@ -44,7 +44,7 @@ const validateInput = (clientId, productId) => {
 
 const validateProductAlreadyExists = (client, productId) => {
     if((client.products || []).indexOf(productId) > -1) {
-        throw errors.defaultException('INVALID_FIELD', `Product ${productId} already registred`, '') 
+        throw errors.defaultException('INVALID_PRODUCT', `Product ${productId} already registred`, '') 
     } 
 }
 

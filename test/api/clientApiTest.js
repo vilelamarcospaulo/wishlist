@@ -98,13 +98,13 @@ describe('API => create client', _ => {
         .post('/client')
         .set('Authorization', `Bearer ${tokenAuth}`)
         .send({name: 'Jhon Doe', email: 'jhon@corp.com',})
-        .expect(500)
+        .expect(412)
         .then(response => response.body)
         .then(body => {
             expect(body).to.contain.property('code')
             expect(body).to.contain.property('errorMessage')
 
-            expect(body.code).to.eq('INVALID_FIELD')
+            expect(body.code).to.eq('INVALID_EMAIL')
             expect(body.errorMessage).to.eq('Email jhon@corp.com already used')
         })
         .then(() => done())
@@ -116,7 +116,7 @@ describe('API => create client', _ => {
         .post('/client')
         .set('Authorization', `Bearer ${tokenAuth}`)
         .send({name: '', email: 'jhon@corp.com',})
-        .expect(500)
+        .expect(400)
         .then(response => response.body)
         .then(body => {
             expect(body).to.contain.property('code')
@@ -134,7 +134,7 @@ describe('API => create client', _ => {
         .post('/client')
         .set('Authorization', `Bearer ${tokenAuth}`)
         .send({name: 'Jhon Doe', email: '',})
-        .expect(500)
+        .expect(400)
         .then(response => response.body)
         .then(body => {
             expect(body).to.contain.property('code')
@@ -152,13 +152,13 @@ describe('API => create client', _ => {
         .post('/client')
         .set('Authorization', `Bearer ${tokenAuth}`)
         .send({name: 'Jhon Doe', email: 'jhon.corp',})
-        .expect(500)
+        .expect(412)
         .then(response => response.body)
         .then(body => {
             expect(body).to.contain.property('code')
             expect(body).to.contain.property('errorMessage')
 
-            expect(body.code).to.eq('INVALID_FIELD')
+            expect(body.code).to.eq('INVALID_EMAIL')
             expect(body.errorMessage).to.eq('Invalid format for email jhon.corp')
         })
         .then(() => done())
@@ -170,13 +170,13 @@ describe('API => create client', _ => {
         .post('/client')
         .set('Authorization', `Bearer ${tokenAuth}`)
         .send({name: 'Jhon Doe', email: 'jhon.corp',})
-        .expect(500)
+        .expect(412)
         .then(response => response.body)
         .then(body => {
             expect(body).to.contain.property('code')
             expect(body).to.contain.property('errorMessage')
 
-            expect(body.code).to.eq('INVALID_FIELD')
+            expect(body.code).to.eq('INVALID_EMAIL')
             expect(body.errorMessage).to.eq('Invalid format for email jhon.corp')
         })
         .then(() => done())
@@ -316,10 +316,10 @@ describe('API => product to client', _ => {
         .post(`/client/${clientId}/product`)
         .set('Authorization', `Bearer ${tokenAuth}`)
         .send({productId: '1bf0f365-fbdd-4e21-9786-da459d78dd1f',})
-        .expect(500)
+        .expect(412)
         .then(response => response.body)
         .then(body => {
-            expect(body.code).to.eq('INVALID_FIELD')
+            expect(body.code).to.eq('INVALID_PRODUCT')
             expect(body.errorMessage).to.eq('Product 1bf0f365-fbdd-4e21-9786-da459d78dd1f already registred')
         })
         .then(() => done())
@@ -331,7 +331,7 @@ describe('API => product to client', _ => {
         .post(`/client/${clientId}/product`)
         .set('Authorization', `Bearer ${tokenAuth}`)
         .send({productId: '-123b',})
-        .expect(500)
+        .expect(412)
         .then(response => response.body)
         .then(body => {
             expect(body.code).to.eq('INVALID_PRODUCT')
@@ -354,5 +354,4 @@ describe('API => product to client', _ => {
         .then(() => done())
         .catch(done)
     })
-
 })

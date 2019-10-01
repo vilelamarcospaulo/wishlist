@@ -106,7 +106,7 @@ describe('insert client', _ => {
             expect(err).to.contain.property('code')
             expect(err).to.contain.property('msg')
 
-            expect(err.code).to.eq('INVALID_FIELD')
+            expect(err.code).to.eq('INVALID_EMAIL')
             expect(err.msg).to.eq('Invalid format for email jhon.co')
 
             done()  
@@ -124,7 +124,7 @@ describe('insert client', _ => {
                 expect(err).to.contain.property('code')
                 expect(err).to.contain.property('msg')
     
-                expect(err.code).to.eq('INVALID_FIELD')
+                expect(err.code).to.eq('INVALID_EMAIL')
                 expect(err.msg).to.eq('Email jhon@corp.com already used')
     
                 done()  
@@ -198,7 +198,7 @@ describe('update client', _ => {
             expect(err).to.contain.property('code')
             expect(err).to.contain.property('msg')
 
-            expect(err.code).to.eq('INVALID_FIELD')
+            expect(err.code).to.eq('INVALID_EMAIL')
             expect(err.msg).to.eq('Invalid format for email jhon.co')
 
             done()  
@@ -216,7 +216,7 @@ describe('update client', _ => {
                 expect(err).to.contain.property('code')
                 expect(err).to.contain.property('msg')
     
-                expect(err.code).to.eq('INVALID_FIELD')
+                expect(err.code).to.eq('INVALID_EMAIL')
                 expect(err.msg).to.eq('Email jhon@corp.com already used')
     
                 done()  
