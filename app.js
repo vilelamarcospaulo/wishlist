@@ -7,26 +7,20 @@ const app = new Koa();
 const router = new Router();
 const secureRouter = new Router();
 
-(async _ => {
-    await require('./infrastructure/dbcollections')(app); // REGISTER DBCOLLECTIONS 
-
-    // REGISTER INTEGRATION
+require('./infrastructure/dbcollections')(app).then( _ => {
     app.integrations = {}
     require('./integration/product')(app)
 
-
-     // REGISTER DOMAINS
     app.domains = {}
     require('./domain/client')(app)
     require('./domain/clientWishlist')(app)
-})()
+})
 
 //AUTH ROUTE
 require('./routes/auth')(router);
 
-secureRouter.use(jwt);
-
 //INITIALIZE ROUTES
+secureRouter.use(jwt);
 require('./routes/index')(secureRouter);
 require('./routes/client')(secureRouter);
 

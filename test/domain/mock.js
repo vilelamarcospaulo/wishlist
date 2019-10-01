@@ -21,7 +21,7 @@ const mockedRepository = {
 }
 
 const mockedIntegration = {
-    find: id => new Promise((ok, nok) => id === 'PRD404' ? ok(null) : ok({}))
+    find: id => new Promise((ok, nok) => id === 'PRD404' ? ok(false) : ok(true))
 }
 
 const app = {

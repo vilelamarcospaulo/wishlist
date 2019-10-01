@@ -1,8 +1,6 @@
-launchctl setenv variable "value"
-
 export PORT=3000
-export AUTH_TOKEN_VALUE=auth
-export JWT_SECRET_VALUE=S3cr3T
+export AUTH_TOKEN_VALUE=auth4tests
+export JWT_SECRET_VALUE=auth4tests
 export MONGO_DB_CONNECTION="mongodb://localhost:27017/WishlistDB"
 export PRODUCT_API_BASE_URL="http://challenge-api.luizalabs.com"
 export PRODUCT_API_PATH="api/product"
