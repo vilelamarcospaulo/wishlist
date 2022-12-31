@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/vilelamarcospaulo/wishlist#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.2",
     "chai": "^4.2.0",
     "koa": "^2.8.2",
     "koa-bodyparser": "^4.2.1",
