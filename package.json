@@ -22,7 +22,7 @@
     "chai": "^4.2.0",
     "koa": "^2.8.2",
     "koa-bodyparser": "^4.2.1",
-    "koa-jwt": "^3.6.0",
+    "koa-jwt": "^4.0.4",
     "koa-router": "^7.4.0",
     "mocha": "^10.2.0",
     "mongo-mock": "^3.7.1",
